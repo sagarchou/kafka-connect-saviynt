@@ -46,20 +46,19 @@ import io.confluent.connect.jdbc.util.TableId;
 import io.confluent.connect.jdbc.util.Version;
 
 /**
- * JdbcConnector is a Kafka Connect Connector implementation that watches a JDBC database and
- * generates tasks to ingest database contents.
+ * SaviyntConnector is a Kafka Connect Connector implementation that watches Saviynt Disconnected App and
+ * generates tasks to ingest Events.
  */
-public class JdbcSourceConnector extends SourceConnector {
+public class SaviyntSourceConnector extends SourceConnector {
 
-  private static final Logger log = LoggerFactory.getLogger(JdbcSourceConnector.class);
+  private static final Logger log = LoggerFactory.getLogger(SaviyntSourceConnector.class);
 
   private static final long MAX_TIMEOUT = 10000L;
 
   private Map<String, String> configProperties;
-  private JdbcSourceConnectorConfig config;
+  private SaviyntSourceConnectorConfig config;
   private CachedConnectionProvider cachedConnectionProvider;
   private TableMonitorThread tableMonitorThread;
-  private DatabaseDialect dialect;
 
   @Override
   public String version() {
@@ -71,7 +70,7 @@ public class JdbcSourceConnector extends SourceConnector {
     log.info("Starting JDBC Source Connector");
     try {
       configProperties = properties;
-      config = new JdbcSourceConnectorConfig(configProperties);
+      config = new SaviyntSourceConnectorConfig(configProperties);
     } catch (ConfigException e) {
       throw new ConnectException("Couldn't start JdbcSourceConnector due to configuration error",
                                  e);
